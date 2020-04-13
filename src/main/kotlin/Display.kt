@@ -1,6 +1,12 @@
 class Display {
+    private var text = "$7.99"
+
     fun getText(): String {
-        return "$7.99"
+        return text
+    }
+
+    fun setText(text:String){
+        this.text = text
     }
 
 }
