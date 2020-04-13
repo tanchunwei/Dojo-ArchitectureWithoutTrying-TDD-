@@ -16,10 +16,10 @@ class POSTest {
     private lateinit var pos : PointOfSales
     @BeforeAll
     fun setup(){
-        var mockRepo = mock(InventoryRepo::class.java)
-        Mockito.`when`(mockRepo.getInventoryList()).thenReturn(mapOf("12345" to "7.99", "67890" to "10.99"))
+        var spyRepo = Mockito.spy(InventoryRepo())
+        Mockito.doReturn(mapOf("12345" to "7.99", "67890" to "10.99")).`when`(spyRepo).getInventoryList()
         display = Display()
-        pos = PointOfSales(display, mockRepo)
+        pos = PointOfSales(display, spyRepo)
     }
 
     @ParameterizedTest
