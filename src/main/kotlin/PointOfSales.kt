@@ -1,6 +1,8 @@
 class PointOfSales(val display: Display) {
     fun onBarcode(barcode: String) {
-        if(barcode == "12345")
+        if(barcode == "")
+            display.setText("Barcode cannot be empty")
+        else if(barcode == "12345")
             display.setText("$7.99")
         else if(barcode == "67890")
             display.setText("$10.99")

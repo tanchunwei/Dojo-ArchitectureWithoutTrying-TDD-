@@ -30,4 +30,13 @@ class POSTest {
         pos.onBarcode(barcode)
         assertEquals(expected, display.getText())
     }
+
+    @Test
+    fun emptyBarcode(){
+        val display = Display()
+        val pos = PointOfSales(display)
+
+        pos.onBarcode("")
+        assertEquals("Barcode cannot be empty", display.getText())
+    }
 }
