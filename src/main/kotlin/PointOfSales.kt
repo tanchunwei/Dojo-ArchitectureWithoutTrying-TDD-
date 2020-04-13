@@ -5,7 +5,7 @@ class PointOfSales(val display: Display) {
         else if(barcode == "67890")
             display.setText("$10.99")
         else
-            display.setText("This product does not exist 556677")
+            display.setText("This product does not exist $barcode")
     }
 
 }

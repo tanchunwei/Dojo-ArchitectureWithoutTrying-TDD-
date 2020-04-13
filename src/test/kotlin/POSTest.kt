@@ -18,12 +18,16 @@ class POSTest {
         assertEquals(expected, display.getText())
     }
 
-    @Test
-    fun productNotFound(){
+    @ParameterizedTest
+    @CsvSource(value = [
+        "556677,This product does not exist 556677",
+        "889900,This product does not exist 889900"
+    ])
+    fun productNotFound(barcode : String, expected : String){
         val display = Display()
         val pos = PointOfSales(display)
 
-        pos.onBarcode("556677")
-        assertEquals("This product does not exist 556677", display.getText())
+        pos.onBarcode(barcode)
+        assertEquals(expected, display.getText())
     }
 }
