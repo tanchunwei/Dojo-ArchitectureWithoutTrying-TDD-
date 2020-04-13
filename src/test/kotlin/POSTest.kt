@@ -14,7 +14,7 @@ class POSTest {
     @BeforeAll
     fun setup(){
         var mockRepo = mock(InventoryRepo::class.java)
-        Mockito.`when`(mockRepo.getInventoryList()).thenReturn(mapOf("12345" to "$7.99", "67890" to "$10.99"))
+        Mockito.`when`(mockRepo.getInventoryList()).thenReturn(mapOf("12345" to "7.99", "67890" to "10.99"))
         display = Display()
         pos = PointOfSales(display, mockRepo)
     }

@@ -7,8 +7,8 @@ class PointOfSales(val display: Display, val inventoryRepo: InventoryRepo) {
 
         val inventoryList = inventoryRepo.getInventoryList()
         if(inventoryList.containsKey(barcode)) {
-            val price = inventoryList.getValue(barcode)
-            displayPrice(price)
+            val priceText = inventoryList.getValue(barcode)
+            displayPrice(priceText)
         } else
             displayProductNotExistMessage(barcode)
     }
@@ -22,7 +22,7 @@ class PointOfSales(val display: Display, val inventoryRepo: InventoryRepo) {
     }
 
     private fun displayPrice(price: String) {
-        display.setText(price)
+        display.setText("$$price")
     }
 
 }
