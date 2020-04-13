@@ -11,4 +11,16 @@ class Display {
         this.text = text
     }
 
+    fun displayProductNotExistMessage(barcode: String) {
+        setText("This product does not exist $barcode")
+    }
+
+    fun displayEmptyBarcodeMessage() {
+        setText("Barcode cannot be empty")
+    }
+
+    fun displayPrice(price: String) {
+        setText("$$price")
+    }
+
 }

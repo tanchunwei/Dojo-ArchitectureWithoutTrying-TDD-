@@ -6,28 +6,16 @@ import view.Display
 class PointOfSales(private val display: Display, private val inventoryRepo: InventoryRepo) {
     fun onBarcode(barcode: String) {
         if(barcode == "") {
-            displayEmptyBarcodeMessage()
+            display.displayEmptyBarcodeMessage()
             return
         }
 
         val inventoryList = inventoryRepo.getInventoryList()
         if(inventoryList.containsKey(barcode)) {
             val priceText = inventoryList.getValue(barcode)
-            displayPrice(priceText)
+            display.displayPrice(priceText)
         } else
-            displayProductNotExistMessage(barcode)
-    }
-
-    fun displayProductNotExistMessage(barcode: String) {
-        display.setText("This product does not exist $barcode")
-    }
-
-    private fun displayEmptyBarcodeMessage() {
-        display.setText("Barcode cannot be empty")
-    }
-
-    private fun displayPrice(price: String) {
-        display.setText("$$price")
+            display.displayProductNotExistMessage(barcode)
     }
 
 }
