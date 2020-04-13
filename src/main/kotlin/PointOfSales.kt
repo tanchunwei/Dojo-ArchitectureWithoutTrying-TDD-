@@ -1,15 +1,28 @@
 class PointOfSales(val display: Display, val inventoryRepo: InventoryRepo) {
     fun onBarcode(barcode: String) {
         if(barcode == "") {
-            display.setText("Barcode cannot be empty")
+            displayEmptyBarcodeMessage()
             return
         }
 
         val inventoryList = inventoryRepo.getInventoryList()
-        if(inventoryList.containsKey(barcode))
-            display.setText(inventoryList.getValue(barcode))
-        else
-            display.setText("This product does not exist $barcode")
+        if(inventoryList.containsKey(barcode)) {
+            val price = inventoryList.getValue(barcode)
+            displayPrice(price)
+        } else
+            displayProductNotExistMessage(barcode)
+    }
+
+    private fun displayProductNotExistMessage(barcode: String) {
+        display.setText("This product does not exist $barcode")
+    }
+
+    private fun displayEmptyBarcodeMessage() {
+        display.setText("Barcode cannot be empty")
+    }
+
+    private fun displayPrice(price: String) {
+        display.setText(price)
     }
 
 }
