@@ -1,26 +1,20 @@
-import junit.framework.Assert.assertEquals
-import org.junit.Ignore
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 
 class POSTest {
 
-    @Test
-    fun productFound(){
+    @ParameterizedTest
+    @CsvSource(value = [
+        "12345,$7.99",
+        "67890,$10.99"
+    ])
+    fun productFound(barcode : String, expected : String){
 
         val display = Display()
         val pos = PointOfSales(display)
 
-        pos.onBarcode("12345")
-        assertEquals("$7.99", display.getText())
-    }
-
-    @Test
-    fun productFoundAnotherBarcode(){
-        val display = Display()
-        val pos = PointOfSales(display)
-
-
-        pos.onBarcode("67890")
-        assertEquals("$10.99", display.getText())
+        pos.onBarcode(barcode)
+        assertEquals(expected, display.getText())
     }
 }
