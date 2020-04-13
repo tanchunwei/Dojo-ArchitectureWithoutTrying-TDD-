@@ -1,4 +1,9 @@
-class PointOfSales(val display: Display, val inventoryRepo: InventoryRepo) {
+package controller
+
+import repository.InventoryRepo
+import view.Display
+
+class PointOfSales(private val display: Display, private val inventoryRepo: InventoryRepo) {
     fun onBarcode(barcode: String) {
         if(barcode == "") {
             displayEmptyBarcodeMessage()
@@ -13,7 +18,7 @@ class PointOfSales(val display: Display, val inventoryRepo: InventoryRepo) {
             displayProductNotExistMessage(barcode)
     }
 
-    private fun displayProductNotExistMessage(barcode: String) {
+    fun displayProductNotExistMessage(barcode: String) {
         display.setText("This product does not exist $barcode")
     }
 

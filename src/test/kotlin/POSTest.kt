@@ -1,3 +1,4 @@
+import controller.PointOfSales
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
@@ -6,6 +7,8 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.mockito.Mockito
 import org.mockito.Mockito.mock
+import repository.InventoryRepo
+import view.Display
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class POSTest {

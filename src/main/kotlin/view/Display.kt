@@ -1,3 +1,5 @@
+package view
+
 class Display {
     private var text = "$7.99"
 
