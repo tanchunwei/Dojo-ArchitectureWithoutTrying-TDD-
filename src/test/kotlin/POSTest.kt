@@ -14,7 +14,6 @@ class POSTest {
         assertEquals("$7.99", display.getText())
     }
 
-    @Ignore("Refactoring - moving output closer to input")
     @Test
     fun productFoundAnotherBarcode(){
         val display = Display()
