@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import org.mockito.Mockito
+import org.mockito.Mockito.mock
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class POSTest {
@@ -11,8 +13,10 @@ class POSTest {
     private lateinit var pos : PointOfSales
     @BeforeAll
     fun setup(){
+        var mockRepo = mock(InventoryRepo::class.java)
+        Mockito.`when`(mockRepo.getInventoryList()).thenReturn(mapOf("12345" to "$7.99", "67890" to "$10.99"))
         display = Display()
-        pos = PointOfSales(display)
+        pos = PointOfSales(display, mockRepo)
     }
 
     @ParameterizedTest
