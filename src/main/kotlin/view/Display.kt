@@ -19,7 +19,7 @@ class Display {
         setText("Barcode cannot be empty")
     }
 
-    fun displayPrice(price: String) {
+    fun displayPrice(price: Double) {
         setText("$$price")
     }
 

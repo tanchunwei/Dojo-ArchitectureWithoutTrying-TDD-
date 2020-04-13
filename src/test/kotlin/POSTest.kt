@@ -17,7 +17,7 @@ class POSTest {
     @BeforeAll
     fun setup(){
         var spyRepo = Mockito.spy(InventoryRepo())
-        Mockito.doReturn(mapOf("12345" to "7.99", "67890" to "10.99")).`when`(spyRepo).getInventoryList()
+        Mockito.doReturn(mapOf("12345" to 7.99, "67890" to 10.99)).`when`(spyRepo).getInventoryList()
         display = Display()
         pos = PointOfSales(display, spyRepo)
     }
