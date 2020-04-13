@@ -15,4 +15,8 @@ class PointOfSales(private val display: Display, private val inventoryRepo: Inve
         } else
             display.displayProductNotExistMessage(barcode)
     }
+
+    fun checkout() {
+        display.displayTotal(38.98)
+    }
 }

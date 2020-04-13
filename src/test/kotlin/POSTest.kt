@@ -17,7 +17,7 @@ class POSTest {
     @BeforeAll
     fun setup(){
         var spyRepo = Mockito.spy(InventoryRepo())
-        Mockito.doReturn(mapOf("12345" to 7.99, "67890" to 10.99)).`when`(spyRepo).getInventoryList()
+        Mockito.doReturn(mapOf("12345" to 7.99, "67890" to 10.99, "09876" to 20)).`when`(spyRepo).getInventoryList()
         display = Display()
         pos = PointOfSales(display, spyRepo)
     }
@@ -46,5 +46,14 @@ class POSTest {
     fun emptyBarcode(){
         pos.onBarcode("")
         assertEquals("Barcode cannot be empty", display.getText())
+    }
+
+    @Test
+    fun checkoutThreeProduct(){
+        pos.onBarcode("12345")
+        pos.onBarcode("67890")
+        pos.onBarcode("09876")
+        pos.checkout()
+        assertEquals("Total: $38.98", display.getText())
     }
 }

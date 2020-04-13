@@ -23,4 +23,8 @@ class Display {
         setText("$$price")
     }
 
+    fun displayTotal(price: Double) {
+        setText("Total: $$price")
+    }
+
 }
