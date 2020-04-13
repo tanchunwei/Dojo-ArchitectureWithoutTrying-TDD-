@@ -1,6 +1,7 @@
 import controller.PointOfSales
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
@@ -14,10 +15,10 @@ import view.Display
 class POSTest {
     private lateinit var display : Display
     private lateinit var pos : PointOfSales
-    @BeforeAll
+    @BeforeEach
     fun setup(){
         var spyRepo = Mockito.spy(InventoryRepo())
-        Mockito.doReturn(mapOf("12345" to 7.99, "67890" to 10.99, "09876" to 20)).`when`(spyRepo).getInventoryList()
+        Mockito.doReturn(mapOf("12345" to 7.99, "67890" to 10.99, "09876" to 20, "54321" to 10)).`when`(spyRepo).getInventoryList()
         display = Display()
         pos = PointOfSales(display, spyRepo)
     }
@@ -48,12 +49,16 @@ class POSTest {
         assertEquals("Barcode cannot be empty", display.getText())
     }
 
-    @Test
-    fun checkoutThreeProduct(){
-        pos.onBarcode("12345")
-        pos.onBarcode("67890")
-        pos.onBarcode("09876")
+    @ParameterizedTest
+    @CsvSource(value = [
+        "12345, 67890, 09876, Total: \$38.98",
+        "12345, 67890, 54321, Total: \$28.98"
+    ])
+    fun checkoutThreeProduct(p1 : String, p2 : String, p3: String, expected : String){
+        pos.onBarcode(p1)
+        pos.onBarcode(p2)
+        pos.onBarcode(p3)
         pos.checkout()
-        assertEquals("Total: $38.98", display.getText())
+        assertEquals(expected, display.getText())
     }
 }
