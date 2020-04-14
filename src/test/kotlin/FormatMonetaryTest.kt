@@ -5,13 +5,14 @@ import org.junit.jupiter.params.provider.CsvSource
 class FormatMonetaryTest {
     @ParameterizedTest(name = "Format {0} to {1}")
     @CsvSource(value = [
-        "799, $7.99"
+        "799, $7.99",
+        "1299, $12.99"
     ])
     fun formatMonetary(price : Int, expectedFormat : String){
         assertEquals(expectedFormat, formatMonetary(price) )
     }
 
     private fun formatMonetary(price: Int): String {
-        return "$7.99"
+        return "$${(price.toFloat() / 100)}"
     }
 }
