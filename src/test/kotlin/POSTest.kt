@@ -82,6 +82,13 @@ class POSTest {
     }
 
     @Test
+    fun sellMultipleItem_CheckoutOneProductNotFound(){
+        pos.onBarcode("778899")
+        pos.checkout()
+        assertEquals("No sale in progress. Try scanning a product.", display.getText())
+    }
+
+    @Test
     fun sellMultipleItem_CheckoutZeroProduct(){
         pos.checkout()
         assertEquals("No sale in progress. Try scanning a product.", display.getText())
