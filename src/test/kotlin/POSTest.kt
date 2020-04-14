@@ -1,13 +1,11 @@
 import controller.PointOfSales
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.mockito.Mockito
-import org.mockito.Mockito.mock
 import repository.InventoryRepo
 import view.Display
 
@@ -18,7 +16,7 @@ class POSTest {
     @BeforeEach
     fun setup(){
         var spyRepo = Mockito.spy(InventoryRepo())
-        Mockito.doReturn(mapOf("12345" to 7.99, "67890" to 10.99, "09876" to 20, "54321" to 10)).`when`(spyRepo).getInventoryList()
+        Mockito.doReturn(mapOf("12345" to 799, "67890" to 1099, "09876" to 2000, "54321" to 1000)).`when`(spyRepo).getInventoryList()
         display = Display()
         pos = PointOfSales(display, spyRepo)
     }

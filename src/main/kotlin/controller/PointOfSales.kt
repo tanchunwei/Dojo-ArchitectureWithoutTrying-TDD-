@@ -4,7 +4,7 @@ import repository.InventoryRepo
 import view.Display
 
 class PointOfSales(private val display: Display, private val inventoryRepo: InventoryRepo) {
-    private val cart: MutableList<Double> = mutableListOf()
+    private val cart: MutableList<Int> = mutableListOf()
 
     fun onBarcode(barcode: String) {
         if(barcode == "") {
@@ -26,10 +26,10 @@ class PointOfSales(private val display: Display, private val inventoryRepo: Inve
             return
         }
 
-        var total = 0.0
+        var total  = 0
         for (price in cart){
             total += price
         }
-        display.displayTotal(String.format("%.2f",total).toDouble())
+        display.displayTotal(total)
     }
 }

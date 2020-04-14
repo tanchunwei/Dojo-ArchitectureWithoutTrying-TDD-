@@ -1,7 +1,7 @@
 package view
 
 class Display {
-    private var text = "$7.99"
+    private var text = ""
 
     fun getText(): String {
         return text
@@ -19,16 +19,17 @@ class Display {
         setText("Barcode cannot be empty")
     }
 
-    fun displayPrice(price: Double) {
-        setText("$$price")
+    fun displayPrice(price: Int) {
+        setText("$${formatPrice(price)}")
     }
 
-    fun displayTotal(price: Double) {
-        setText("Total: $$price")
+    fun displayTotal(price: Int) {
+        setText("Total: $${formatPrice(price)}")
     }
 
     fun displayNoItemInCartMessage() {
         setText("No sale in progress. Try scanning a product.")
     }
 
+    private fun formatPrice(price: Int) = price.toFloat() / 100
 }

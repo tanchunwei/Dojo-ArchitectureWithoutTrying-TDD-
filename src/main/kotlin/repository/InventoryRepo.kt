@@ -1,7 +1,7 @@
 package repository
 
 class InventoryRepo {
-    fun getInventoryList() : Map<String, Double> {
+    fun getInventoryList() : Map<String, Int> {
         TODO("Implement production code to get inventory list")
     }
 
