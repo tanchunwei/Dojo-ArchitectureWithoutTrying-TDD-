@@ -26,10 +26,17 @@ class PointOfSales(private val display: Display, private val inventoryRepo: Inve
             return
         }
 
-        var total  = 0
-        for (price in cart){
-            total += price
-        }
+        val total = computeCartTotal(cart)
         display.displayTotal(total)
+    }
+
+    companion object {
+        fun computeCartTotal(cart1: MutableList<Int>): Int {
+            var total = 0
+            for (price in cart1) {
+                total += price
+            }
+            return total
+        }
     }
 }
