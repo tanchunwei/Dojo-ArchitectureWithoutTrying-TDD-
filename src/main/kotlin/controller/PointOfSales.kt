@@ -21,6 +21,11 @@ class PointOfSales(private val display: Display, private val inventoryRepo: Inve
     }
 
     fun checkout() {
+        if(cart.isEmpty()) {
+            display.displayNoItemInCartMessage()
+            return
+        }
+
         var total = 0.0
         for (price in cart){
             total += price

@@ -27,4 +27,8 @@ class Display {
         setText("Total: $$price")
     }
 
+    fun displayNoItemInCartMessage() {
+        setText("No sale in progress. Try scanning a product.")
+    }
+
 }
