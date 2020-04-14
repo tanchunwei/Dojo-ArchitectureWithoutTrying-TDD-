@@ -1,5 +1,6 @@
 package controller
 
+import extension.MutableListIntExtension.Companion.total
 import repository.InventoryRepo
 import view.Display
 
@@ -26,17 +27,7 @@ class PointOfSales(private val display: Display, private val inventoryRepo: Inve
             return
         }
 
-        val total = computeCartTotal(cart)
+        val total = cart.total()
         display.displayTotal(total)
-    }
-
-    companion object {
-        fun computeCartTotal(cart1: MutableList<Int>): Int {
-            var total = 0
-            for (price in cart1) {
-                total += price
-            }
-            return total
-        }
     }
 }
