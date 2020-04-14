@@ -7,7 +7,9 @@ class FormatMonetaryTest {
     @CsvSource(value = [
         "799, $7.99",
         "1299, $12.99",
-        "1000, $10.00"
+        "1000, $10.00",
+        "0, $0.00",
+        "3, $0.03"
     ])
     fun formatMonetary(price : Int, expectedFormat : String){
         assertEquals(expectedFormat, formatMonetary(price) )
