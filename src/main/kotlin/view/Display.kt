@@ -1,5 +1,7 @@
 package view
 
+import java.math.BigDecimal
+
 class Display {
     private var text = ""
 
@@ -32,4 +34,9 @@ class Display {
     }
 
     private fun formatPrice(price: Int) = price.toFloat() / 100
+
+    fun formatMonetary(price: Int): String {
+        return "$${String.format("%,.2f",price.toBigDecimal().divide(BigDecimal(100)))}"
+    }
 }
+
