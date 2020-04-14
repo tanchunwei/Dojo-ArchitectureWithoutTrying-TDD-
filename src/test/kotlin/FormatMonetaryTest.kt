@@ -6,13 +6,14 @@ class FormatMonetaryTest {
     @ParameterizedTest(name = "Format {0} to {1}")
     @CsvSource(value = [
         "799, $7.99",
-        "1299, $12.99"
+        "1299, $12.99",
+        "1000, $10.00"
     ])
     fun formatMonetary(price : Int, expectedFormat : String){
         assertEquals(expectedFormat, formatMonetary(price) )
     }
 
     private fun formatMonetary(price: Int): String {
-        return "$${(price.toFloat() / 100)}"
+        return "$${String.format("%.2f",price.toFloat() / 100)}"
     }
 }
