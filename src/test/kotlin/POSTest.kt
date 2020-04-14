@@ -21,7 +21,7 @@ class POSTest {
         pos = PointOfSales(display, spyRepo)
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "Test {index}: barcode {0} should display {1} when scan")
     @CsvSource(value = [
         "12345,$7.99",
         "67890,$10.99"
@@ -31,7 +31,7 @@ class POSTest {
         assertEquals(expected, display.getText())
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "Test {index}: barcode {0} should display {1} when scan")
     @CsvSource(value = [
         "556677,This product does not exist 556677",
         "889900,This product does not exist 889900"
@@ -47,7 +47,7 @@ class POSTest {
         assertEquals("Barcode cannot be empty", display.getText())
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "Test {index}: scan barcode {0}, {1}, {2} should display {3} when checkout")
     @CsvSource(value = [
         "12345, 67890, 09876, Total: \$38.98",
         "12345, 67890, 54321, Total: \$28.98"
@@ -60,7 +60,7 @@ class POSTest {
         assertEquals(expected, display.getText())
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "Test {index}: scan barcode {0}, {1}, {2} should display {3} when checkout")
     @CsvSource(value = [
         "12345, 778899, 09876, Total: \$27.99"
     ])
