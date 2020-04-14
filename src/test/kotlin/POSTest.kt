@@ -15,13 +15,13 @@ class POSTest {
     private lateinit var pos : PointOfSales
     @BeforeEach
     fun setup(){
-        var spyRepo = Mockito.spy(InventoryRepo())
+        val spyRepo = Mockito.spy(InventoryRepo())
         Mockito.doReturn(mapOf("12345" to 799, "67890" to 1099, "09876" to 2000, "54321" to 1000)).`when`(spyRepo).getInventoryList()
         display = Display()
         pos = PointOfSales(display, spyRepo)
     }
 
-    @ParameterizedTest(name = "Test {index}: barcode {0} should display {1} when scan")
+    @ParameterizedTest(name = "Test {index}: exist barcode {0} should display {1} when scan")
     @CsvSource(value = [
         "12345,$7.99",
         "67890,$10.99"
@@ -31,7 +31,7 @@ class POSTest {
         assertEquals(expected, display.getText())
     }
 
-    @ParameterizedTest(name = "Test {index}: barcode {0} should display {1} when scan")
+    @ParameterizedTest(name = "Test {index}: non exist barcode {0} should display {1} when scan")
     @CsvSource(value = [
         "556677,This product does not exist 556677",
         "889900,This product does not exist 889900"
@@ -47,7 +47,7 @@ class POSTest {
         assertEquals("Barcode cannot be empty", display.getText())
     }
 
-    @ParameterizedTest(name = "Test {index}: scan barcode {0}, {1}, {2} should display {3} when checkout")
+    @ParameterizedTest(name = "Test {index}: scan exist barcode {0}, {1}, {2} should display {3} when checkout")
     @CsvSource(value = [
         "12345, 67890, 09876, Total: \$38.98",
         "12345, 67890, 54321, Total: \$28.98"
@@ -60,7 +60,7 @@ class POSTest {
         assertEquals(expected, display.getText())
     }
 
-    @ParameterizedTest(name = "Test {index}: scan barcode {0}, {1}, {2} should display {3} when checkout")
+    @ParameterizedTest(name = "Test {index}: scan exist barcode {0}, {2} and non exist barcode {1} should display {3} when checkout")
     @CsvSource(value = [
         "12345, 778899, 09876, Total: \$27.99"
     ])
@@ -81,7 +81,7 @@ class POSTest {
 
     @Test
     fun sellMultipleItem_CheckoutOneProductNotFound(){
-        pos.onBarcode("778899")
+        pos.onBarcode("NonExistBarcode")
         pos.checkout()
         assertEquals("No sale in progress. Try scanning a product.", display.getText())
     }
