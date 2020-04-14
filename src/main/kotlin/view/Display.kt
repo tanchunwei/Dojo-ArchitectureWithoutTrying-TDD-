@@ -22,18 +22,16 @@ class Display {
     }
 
     fun displayPrice(price: Int) {
-        setText("$${formatPrice(price)}")
+        setText(formatMonetary(price))
     }
 
     fun displayTotal(price: Int) {
-        setText("Total: $${formatPrice(price)}")
+        setText("Total: ${formatMonetary(price)}")
     }
 
     fun displayNoItemInCartMessage() {
         setText("No sale in progress. Try scanning a product.")
     }
-
-    private fun formatPrice(price: Int) = price.toFloat() / 100
 
     fun formatMonetary(price: Int): String {
         return "$${String.format("%,.2f",price.toBigDecimal().divide(BigDecimal(100)))}"
