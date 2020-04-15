@@ -1,9 +1,9 @@
 package controller
 
 import repository.interfaces.IInventory
-import view.Display
+import view.interfaces.IDisplay
 
-class POSController(private val inventory: IInventory, private val display: Display) {
+class POSController(private val inventory: IInventory, private val display: IDisplay) {
 
     fun onBarcode(barcode: String) {
         if(barcode == ""){

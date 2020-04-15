@@ -1,18 +1,18 @@
 import controller.POSController
-import view.Display
 import model.Price
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito
 import repository.interfaces.IInventory
+import view.interfaces.IDisplay
 
 class POSControllerTest() {
-    private lateinit var displayMock: Display
+    private lateinit var displayMock: IDisplay
     private lateinit var inventorMock: IInventory
 
     @BeforeEach
     fun setup(){
-        displayMock = Mockito.mock(Display::class.java)
+        displayMock = Mockito.mock(IDisplay::class.java)
         inventorMock = Mockito.mock(IInventory::class.java)
         //inventoryRepoMock = Mockito.spy(repository.InventoryRepo())
     }
