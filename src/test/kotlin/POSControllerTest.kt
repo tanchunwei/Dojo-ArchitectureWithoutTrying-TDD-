@@ -1,13 +1,22 @@
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito
 
-class POSControllerTest {
+class POSControllerTest() {
+    private lateinit var displayMock: Display
+    private lateinit var inventoryRepoMock: InventoryRepo
+
+    @BeforeEach
+    fun setup(){
+        displayMock = Mockito.mock(Display::class.java)
+        inventoryRepoMock = Mockito.mock(InventoryRepo::class.java)
+        //inventoryRepoMock = Mockito.spy(InventoryRepo())
+    }
+
     @Test
     fun productFound(){
         val price = Price()
-        val displayMock = Mockito.mock(Display::class.java)
         //val inventoryRepoMock = Mockito.spy(InventoryRepo())
-        var inventoryRepoMock = Mockito.mock(InventoryRepo::class.java)
         Mockito.doReturn(price).`when`(inventoryRepoMock).getInventory("::product found barcode::")
 
         POSController(inventoryRepoMock, displayMock).onBarcode("::product found barcode::")
