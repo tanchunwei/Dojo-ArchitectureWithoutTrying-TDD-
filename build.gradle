@@ -16,6 +16,7 @@ dependencies {
     testCompile 'org.junit.jupiter:junit-jupiter-api:5.4.2'
     testCompile 'org.junit.jupiter:junit-jupiter-params:5.6.1'
     testCompile 'org.mockito:mockito-scala-specs2_2.11:1.13.8'
+    testCompile group: 'org.mockito', name: 'mockito-inline', version: '2.7.13'
 }
 
 compileKotlin {
@@ -23,4 +24,8 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+test {
+    useJUnitPlatform()
 }
