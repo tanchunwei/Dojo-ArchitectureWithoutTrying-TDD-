@@ -15,7 +15,7 @@ class POSControllerTest() {
 
     @Test
     fun productFound(){
-        val price = Price()
+        val price = Price(1250)
         Mockito.doReturn(price).`when`(inventoryRepoMock).getInventory("::product found barcode::")
 
         POSController(inventoryRepoMock, displayMock).onBarcode("::product found barcode::")
@@ -43,9 +43,9 @@ class POSControllerTest() {
     }
 }
 
-class InventoryRepo {
+class InventoryRepo(private val products: Map<String, Price>) {
     fun getInventory(barcode: String): Price {
-        TODO("Not yet implemented")
+        return products[barcode]!!
     }
 
 }
@@ -83,6 +83,6 @@ class Display {
 
 }
 
-class Price {
+class Price(cents: Int) {
 
 }
