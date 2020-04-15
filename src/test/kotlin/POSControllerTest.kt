@@ -24,6 +24,17 @@ class POSControllerTest {
 
         Mockito.verify(displayMock).displayProductNotFound("::product not found barcode::")
     }
+
+    @Test
+    fun emptyBarcode(){
+        val displayMock = Mockito.mock(Display::class.java)
+        val inventoryRepoMock = Mockito.spy(InventoryRepo())
+
+        POSController(inventoryRepoMock, displayMock).onBarcode("")
+
+        Mockito.verify(displayMock).displayEmptyBarcode()
+        Mockito.verifyNoMoreInteractions(displayMock)
+    }
 }
 
 class InventoryRepo {
@@ -36,6 +47,11 @@ class InventoryRepo {
 class POSController(private val inventoryRepo: InventoryRepo, private val display: Display) {
 
     fun onBarcode(barcode: String) {
+        if(barcode == ""){
+            display.displayEmptyBarcode()
+            return
+        }
+
         val price = inventoryRepo.getInventory(barcode)
 
         if(price == null)
@@ -52,6 +68,10 @@ class Display {
     }
 
     fun displayProductNotFound(barcode: String) {
+        TODO("Not yet implemented")
+    }
+
+    fun displayEmptyBarcode() {
         TODO("Not yet implemented")
     }
 
