@@ -16,7 +16,6 @@ class POSControllerTest() {
     @Test
     fun productFound(){
         val price = Price()
-        //val inventoryRepoMock = Mockito.spy(InventoryRepo())
         Mockito.doReturn(price).`when`(inventoryRepoMock).getInventory("::product found barcode::")
 
         POSController(inventoryRepoMock, displayMock).onBarcode("::product found barcode::")
