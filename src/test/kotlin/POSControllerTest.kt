@@ -1,6 +1,10 @@
+import controller.POSController
+import view.Display
+import model.Price
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito
+import repository.InventoryRepo
 
 class POSControllerTest() {
     private lateinit var displayMock: Display
@@ -10,7 +14,7 @@ class POSControllerTest() {
     fun setup(){
         displayMock = Mockito.mock(Display::class.java)
         inventoryRepoMock = Mockito.mock(InventoryRepo::class.java)
-        //inventoryRepoMock = Mockito.spy(InventoryRepo())
+        //inventoryRepoMock = Mockito.spy(repository.InventoryRepo())
     }
 
     @Test
@@ -43,46 +47,3 @@ class POSControllerTest() {
     }
 }
 
-class InventoryRepo(private val products: Map<String, Price>) {
-    fun getInventory(barcode: String): Price {
-        return products[barcode]!!
-    }
-
-}
-
-class POSController(private val inventoryRepo: InventoryRepo, private val display: Display) {
-
-    fun onBarcode(barcode: String) {
-        if(barcode == ""){
-            display.displayEmptyBarcode()
-            return
-        }
-
-        val price = inventoryRepo.getInventory(barcode)
-
-        if(price == null)
-            display.displayProductNotFound(barcode)
-        else
-            display.displayPrice(price)
-    }
-
-}
-
-class Display {
-    fun displayPrice(price: Price) {
-        TODO("Not yet implemented")
-    }
-
-    fun displayProductNotFound(barcode: String) {
-        TODO("Not yet implemented")
-    }
-
-    fun displayEmptyBarcode() {
-        TODO("Not yet implemented")
-    }
-
-}
-
-class Price(cents: Int) {
-
-}

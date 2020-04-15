@@ -1,5 +1,7 @@
+import model.Price
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import repository.InventoryRepo
 
 // Assuming is an in-memory repo
 class InventoryRepoTest {
