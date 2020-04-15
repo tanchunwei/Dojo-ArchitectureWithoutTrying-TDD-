@@ -17,7 +17,7 @@ class InventoryRepoTest {
 
     @Test
     fun priceNotFound(){
-        val inventoryRepo = InventoryRepo(mapOf("12345" to Price(1250)))
+        val inventoryRepo = InventoryRepo(mapOf())
 
         val actualPrice = inventoryRepo.getInventory("67890")
 
