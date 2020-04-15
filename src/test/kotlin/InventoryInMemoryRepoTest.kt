@@ -1,10 +1,10 @@
 import model.Price
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import repository.InventoryRepo
+import repository.interfaces.IInventory
+import repository.InventoryInMemoryRepo
 
-// Assuming is an in-memory repo
-class InventoryRepoTest {
+class InventoryInMemoryRepoTest {
     @Test
     fun priceFound(){
         val priceInProduct = Price(1250)
@@ -21,11 +21,11 @@ class InventoryRepoTest {
         assertEquals(null, actualPrice)
     }
 
-    private fun inventoryWith(barcode: String, price: Price): InventoryRepo {
-        return InventoryRepo(mapOf(barcode to price))
+    private fun inventoryWith(barcode: String, price: Price): IInventory {
+        return InventoryInMemoryRepo(mapOf(barcode to price))
     }
 
-    private fun inventoryWithout(barcode : String): InventoryRepo {
-        return InventoryRepo(mapOf("any barcode except $barcode" to Price(0)))
+    private fun inventoryWithout(barcode : String): IInventory {
+        return InventoryInMemoryRepo(mapOf("any barcode except $barcode" to Price(0)))
     }
 }

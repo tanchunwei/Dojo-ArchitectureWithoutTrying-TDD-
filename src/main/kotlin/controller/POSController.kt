@@ -1,9 +1,9 @@
 package controller
 
+import repository.interfaces.IInventory
 import view.Display
-import repository.InventoryRepo
 
-class POSController(private val inventoryRepo: InventoryRepo, private val display: Display) {
+class POSController(private val inventory: IInventory, private val display: Display) {
 
     fun onBarcode(barcode: String) {
         if(barcode == ""){
@@ -11,7 +11,7 @@ class POSController(private val inventoryRepo: InventoryRepo, private val displa
             return
         }
 
-        val price = inventoryRepo.getInventory(barcode)
+        val price = inventory.getInventory(barcode)
 
         if(price == null)
             display.displayProductNotFound(barcode)
