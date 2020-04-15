@@ -6,7 +6,8 @@ class POSControllerTest {
     fun productFound(){
         val price = Price()
         val displayMock = Mockito.mock(Display::class.java)
-        val inventoryRepoMock = Mockito.spy(InventoryRepo())
+        //val inventoryRepoMock = Mockito.spy(InventoryRepo())
+        var inventoryRepoMock = Mockito.mock(InventoryRepo::class.java)
         Mockito.doReturn(price).`when`(inventoryRepoMock).getInventory("12345")
 
         POSController(inventoryRepoMock, displayMock).onBarcode("12345")
@@ -18,7 +19,7 @@ class POSControllerTest {
     @Test
     fun productNotFound(){
         val displayMock = Mockito.mock(Display::class.java)
-        val inventoryRepoMock = Mockito.spy(InventoryRepo())
+        var inventoryRepoMock = Mockito.mock(InventoryRepo::class.java)
         Mockito.doReturn(null).`when`(inventoryRepoMock).getInventory("::product not found barcode::")
 
         POSController(inventoryRepoMock, displayMock).onBarcode("::product not found barcode::")
@@ -30,7 +31,7 @@ class POSControllerTest {
     @Test
     fun emptyBarcode(){
         val displayMock = Mockito.mock(Display::class.java)
-        val inventoryRepoMock = Mockito.spy(InventoryRepo())
+        var inventoryRepoMock = Mockito.mock(InventoryRepo::class.java)
 
         POSController(inventoryRepoMock, displayMock).onBarcode("")
 
