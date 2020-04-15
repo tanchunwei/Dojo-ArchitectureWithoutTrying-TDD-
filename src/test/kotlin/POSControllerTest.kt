@@ -26,8 +26,6 @@ class POSControllerTest() {
 
     @Test
     fun productNotFound(){
-        val displayMock = Mockito.mock(Display::class.java)
-        var inventoryRepoMock = Mockito.mock(InventoryRepo::class.java)
         Mockito.doReturn(null).`when`(inventoryRepoMock).getInventory("::product not found barcode::")
 
         POSController(inventoryRepoMock, displayMock).onBarcode("::product not found barcode::")
@@ -38,9 +36,6 @@ class POSControllerTest() {
 
     @Test
     fun emptyBarcode(){
-        val displayMock = Mockito.mock(Display::class.java)
-        var inventoryRepoMock = Mockito.mock(InventoryRepo::class.java)
-
         POSController(inventoryRepoMock, displayMock).onBarcode("")
 
         Mockito.verify(displayMock).displayEmptyBarcode()
