@@ -12,6 +12,7 @@ class POSControllerTest {
         POSController(inventoryRepoMock, displayMock).onBarcode("12345")
 
         Mockito.verify(displayMock).displayPrice(price)
+        Mockito.verifyNoMoreInteractions(displayMock)
     }
 
     @Test
@@ -23,6 +24,7 @@ class POSControllerTest {
         POSController(inventoryRepoMock, displayMock).onBarcode("::product not found barcode::")
 
         Mockito.verify(displayMock).displayProductNotFound("::product not found barcode::")
+        Mockito.verifyNoMoreInteractions(displayMock)
     }
 
     @Test
