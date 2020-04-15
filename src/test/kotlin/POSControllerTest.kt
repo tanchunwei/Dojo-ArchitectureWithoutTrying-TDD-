@@ -8,9 +8,9 @@ class POSControllerTest {
         val displayMock = Mockito.mock(Display::class.java)
         //val inventoryRepoMock = Mockito.spy(InventoryRepo())
         var inventoryRepoMock = Mockito.mock(InventoryRepo::class.java)
-        Mockito.doReturn(price).`when`(inventoryRepoMock).getInventory("12345")
+        Mockito.doReturn(price).`when`(inventoryRepoMock).getInventory("::product found barcode::")
 
-        POSController(inventoryRepoMock, displayMock).onBarcode("12345")
+        POSController(inventoryRepoMock, displayMock).onBarcode("::product found barcode::")
 
         Mockito.verify(displayMock).displayPrice(price)
         Mockito.verifyNoMoreInteractions(displayMock)
