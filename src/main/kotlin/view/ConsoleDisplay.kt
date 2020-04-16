@@ -9,7 +9,7 @@ class ConsoleDisplay : IDisplay {
     }
 
     override fun displayProductNotFound(barcode: String) {
-        TODO("Not yet implemented")
+        println("Product not found [$barcode]")
     }
 
     override fun displayEmptyBarcode() {
