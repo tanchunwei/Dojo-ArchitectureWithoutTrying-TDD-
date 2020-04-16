@@ -5,7 +5,7 @@ import view.interfaces.IDisplay
 
 class ConsoleDisplay : IDisplay {
     override fun displayPrice(price: Price) {
-        TODO("Not yet implemented")
+        println(price)
     }
 
     override fun displayProductNotFound(barcode: String) {
