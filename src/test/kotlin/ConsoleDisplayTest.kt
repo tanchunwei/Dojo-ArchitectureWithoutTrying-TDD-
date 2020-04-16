@@ -45,4 +45,13 @@ class ConsoleDisplayTest() {
         val expectedResult : Any = "Product not found [barcode]"
         verify(outMock).println(expectedResult)
     }
+
+    @Test
+    fun displayEmptyBarcode(){
+        val display : IDisplay = ConsoleDisplay()
+        display.displayEmptyBarcode()
+
+        val expectedResult : Any = "Barcode is empty. Please try to rescan"
+        verify(outMock).println(expectedResult)
+    }
 }

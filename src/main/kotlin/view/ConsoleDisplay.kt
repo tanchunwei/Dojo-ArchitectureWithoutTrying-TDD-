@@ -13,7 +13,7 @@ class ConsoleDisplay : IDisplay {
     }
 
     override fun displayEmptyBarcode() {
-        TODO("Not yet implemented")
+        println("Barcode is empty. Please try to rescan")
     }
 
 }
