@@ -6,7 +6,9 @@ import org.junit.jupiter.params.provider.CsvSource
 class PriceTest {
     @ParameterizedTest(name = "Price in cents of {0} is {1} in dollar")
     @CsvSource(value = [
-        "1250, $12.50"
+        "1250, $12.50",
+        "0, $0.00",
+        "3, $0.03"
     ])
     fun toString(priceInCents : Int, expectedResult : String){
         assertEquals(expectedResult, Price(priceInCents).toString())
