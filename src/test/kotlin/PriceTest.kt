@@ -9,7 +9,8 @@ class PriceTest {
         "1250| $12.50",
         "0| $0.00",
         "3| $0.03",
-        "105000| $1,050.00"
+        "105000| $1,050.00",
+        "143688291| $1,436,882.91"
     ], delimiter = '|')
     fun toString(priceInCents : Int, expectedResult : String){
         assertEquals(expectedResult, Price(priceInCents).toString())
