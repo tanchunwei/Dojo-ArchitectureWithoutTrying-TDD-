@@ -1,5 +1,6 @@
 import model.Price
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
@@ -14,5 +15,10 @@ class PriceTest {
     ], delimiter = '|')
     fun toString(priceInCents : Int, expectedResult : String){
         assertEquals(expectedResult, Price(priceInCents).toString())
+    }
+
+    @Test
+    fun priceEqual(){
+        assertEquals(Price(1250), Price(1250))
     }
 }
