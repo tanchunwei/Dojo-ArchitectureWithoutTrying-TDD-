@@ -1,22 +1,34 @@
-package controller
+package com.pos.controller
 
-import repository.interfaces.IInventory
-import view.interfaces.IDisplay
+import com.pos.service.POSService
+import model.Price
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
+import repository.InventoryInMemoryRepo
+import view.ConsoleDisplay
 
-class POSController(private val inventory: IInventory, private val display: IDisplay) {
+@RestController()
+@RequestMapping("api")
+class PosController{
+    private val posService : POSService = POSService(
+        InventoryInMemoryRepo(mapOf("12345" to Price(1250))),
+        ConsoleDisplay()
+    )
 
-    fun onBarcode(barcode: String) {
-        if(barcode == ""){
-            display.displayEmptyBarcode()
-            return
-        }
-
-        val price = inventory.getInventory(barcode)
-
-        if(price == null)
-            display.displayProductNotFound(barcode)
-        else
-            display.displayPrice(price)
+    @RequestMapping(value = ["/test"], method = [RequestMethod.GET], produces = ["application/json"])
+    fun test() : ResponseEntity<String>{
+        return  ResponseEntity<String>("test", HttpStatus.OK)
     }
 
+    @GetMapping("test2")
+    fun test2() : ResponseEntity<String>{
+        return  ResponseEntity<String>("test", HttpStatus.OK)
+    }
+
+    @GetMapping("barcode/{barcode}")
+    fun barcode(@PathVariable barcode : String) : ResponseEntity<String>{
+        posService.onBarcode(barcode)
+        return  ResponseEntity<String>("test", HttpStatus.OK)
+    }
 }

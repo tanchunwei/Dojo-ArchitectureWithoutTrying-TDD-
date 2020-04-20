@@ -18,6 +18,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-starter-data-jpa"
     runtime "org.springframework.boot:spring-boot-starter-tomcat"
+    compile 'org.jetbrains.kotlin:kotlin-reflect:1.1.51'
     compile group: 'io.undertow', name: 'undertow-core', version: '2.0.30.Final'
     compile group: 'io.undertow', name: 'undertow-servlet', version: '2.0.30.Final'
 
