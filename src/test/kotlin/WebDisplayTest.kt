@@ -10,7 +10,7 @@ class WebDisplayTest{
 
         display.displayPrice(Price(1250))
 
-        assertEquals("{'display':'$12.50'}", display.toJson())
+        assertEquals("{\"display\":\"$12.50\"}", display.toJson())
     }
 
     @Test
@@ -19,7 +19,7 @@ class WebDisplayTest{
 
         display.displayProductNotFound("barcode")
 
-        assertEquals("{'display':'Product not found [barcode]'}", display.toJson())
+        assertEquals("{\"display\":\"Product not found [barcode]\"}", display.toJson())
     }
 
     @Test
@@ -28,6 +28,6 @@ class WebDisplayTest{
 
         display.displayEmptyBarcode()
 
-        assertEquals("{'display':'Barcode is empty. Please try to rescan'}", display.toJson())
+        assertEquals("{\"display\":\"Barcode is empty. Please try to rescan\"}", display.toJson())
     }
 }

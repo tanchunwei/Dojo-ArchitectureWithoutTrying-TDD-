@@ -1,19 +1,20 @@
 package com.pos.controller
 
 import com.pos.service.POSService
+import com.pos.view.WebDisplay
 import model.Price
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import repository.InventoryInMemoryRepo
-import view.ConsoleDisplay
 
 @RestController()
 @RequestMapping("api")
 class PosController{
+    private val display = WebDisplay()
     private val posService : POSService = POSService(
         InventoryInMemoryRepo(mapOf("12345" to Price(1250))),
-        ConsoleDisplay()
+        display
     )
 
     @RequestMapping(value = ["/test"], method = [RequestMethod.GET], produces = ["application/json"])
@@ -26,9 +27,9 @@ class PosController{
         return  ResponseEntity<String>("test", HttpStatus.OK)
     }
 
-    @GetMapping("barcode/{barcode}")
+    @GetMapping("barcode/{barcode}", produces = ["application/json"])
     fun barcode(@PathVariable barcode : String) : ResponseEntity<String>{
         posService.onBarcode(barcode)
-        return  ResponseEntity<String>("test", HttpStatus.OK)
+        return  ResponseEntity<String>(display.toJson(), HttpStatus.OK)
     }
 }

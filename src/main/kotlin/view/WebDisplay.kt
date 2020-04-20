@@ -19,6 +19,6 @@ class WebDisplay : IDisplay {
     }
 
     fun toJson(): String {
-        return "{'display':'$display'}"
+        return "{\"display\":\"$display\"}"
     }
 }
