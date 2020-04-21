@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import repository.InventoryInMemoryRepo
+import java.time.LocalDateTime
 
 @RestController()
 @RequestMapping("api")
@@ -29,6 +30,7 @@ class PosController{
 
     @GetMapping("barcode/{barcode}", produces = ["application/json"])
     fun barcode(@PathVariable barcode : String) : ResponseEntity<String>{
+        println("${LocalDateTime.now()}: barcode call")
         posService.onBarcode(barcode)
         return  ResponseEntity<String>(display.toJson(), HttpStatus.OK)
     }

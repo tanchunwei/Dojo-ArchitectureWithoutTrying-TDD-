@@ -11,4 +11,4 @@ spring:
       - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 
 server:
-  port: 8090
+  port: 9000

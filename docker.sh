@@ -7,5 +7,4 @@
 #example of how to create container from images
 #sudo docker container create --name pos-s1 -p 8090:8080 pos-1.0
 
-sudo docker-compose up -d
-sudo docker-compose --scale web=4
+sudo docker-compose up --scale web=2 -d
