@@ -12,3 +12,9 @@ spring:
 
 server:
   port: 9000
+
+logging:
+  level:
+    .: error
+    com.pos: TRACE
+    org.springframework: ERROR

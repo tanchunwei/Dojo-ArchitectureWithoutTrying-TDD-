@@ -17,6 +17,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    implementation "org.springframework.boot:spring-boot-starter-log4j2"
     runtime "org.springframework.boot:spring-boot-starter-tomcat"
     compile 'org.jetbrains.kotlin:kotlin-reflect:1.1.51'
     compile group: 'io.undertow', name: 'undertow-core', version: '2.0.30.Final'
@@ -27,6 +28,12 @@ dependencies {
     testCompile 'org.junit.jupiter:junit-jupiter-params:5.6.1'
     testCompile 'org.mockito:mockito-scala-specs2_2.11:1.13.8'
     testCompile group: 'org.mockito', name: 'mockito-inline', version: '2.7.13'
+}
+
+configurations{
+    all {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
 }
 
 compileKotlin {
