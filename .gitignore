@@ -2,3 +2,4 @@
 /src/test/resources/
 /.gradle/
 /build/
+/log/
