@@ -10,4 +10,7 @@
 #example to go into container `command`
 #sudo docker exec -it <container id> "bin/bash"
 
+#example to go into posgres console
+#docker exec -it <container id> psql -U postgres
+
 sudo docker-compose up --scale web=2 -d

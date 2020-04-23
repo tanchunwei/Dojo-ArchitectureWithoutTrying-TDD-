@@ -1,14 +1,17 @@
-#spring:
-#    datasource:
-#      driverClassName: com.mysql.cj.jdbc.Driver
-#      url: jdbc:mysql://localhost:3306/myDB
-#      username: userl
-#      password: pass
 
 spring:
-  autoconfigure:
-    exclude:
-      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+    datasource:
+      url: jdbc:postgresql://localhost:5432/pos
+      username: postgres
+      password: password
+      hikari:
+        connectionTimeout: 20000
+        maximumPOolSize: 5
+
+#spring:
+#  autoconfigure:
+#    exclude:
+#      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 
 server:
   port: 9000
