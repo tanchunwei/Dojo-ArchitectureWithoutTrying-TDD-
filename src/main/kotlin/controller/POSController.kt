@@ -50,7 +50,7 @@ class PosController(
 
     @GetMapping("barcodedb/{barcode}", produces = ["application/json"])
     fun barcodedb(@PathVariable barcode : String) : ResponseEntity<String>{
-        logger.trace("onBarcode $barcode")
+        logger.trace("onBarcodeDB $barcode")
         posServiceDB.onBarcode(barcode)
         return  ResponseEntity<String>(display.toJson(), HttpStatus.OK)
     }

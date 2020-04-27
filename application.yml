@@ -1,12 +1,13 @@
 
 spring:
     datasource:
-      url: jdbc:postgresql://localhost:5432/pos
+      #url: jdbc:postgresql://localhost:5432/pos #For local
+      url: jdbc:postgresql://db:5432/pos #For docker
       username: postgres
       password: password
       hikari:
         connectionTimeout: 20000
-        maximumPOolSize: 5
+        maximumPoolSize: 5
 
 #spring:
 #  autoconfigure:
