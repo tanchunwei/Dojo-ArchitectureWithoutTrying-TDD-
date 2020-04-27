@@ -2,7 +2,8 @@
 spring:
     datasource:
       #url: jdbc:postgresql://localhost:5432/pos #For local
-      url: jdbc:postgresql://db:5432/pos #For docker
+      #url: jdbc:postgresql://db:5432/pos #For docker
+      url: jdbc:postgresql://db-service:5432/pos #For k8s
       username: postgres
       password: password
       hikari:
