@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: pos-ingress
+spec:
+  rules:
+  - host: pos.com
+    http:
+      paths:
+      - backend:
+          serviceName: pos-service
+          servicePort: 8090
+# kubectl get ingress
+# note that after ip address is assigned, need to add the ip into the host file
+# so that the external server [access hostname] -> ingress controller -> service -> pod
+# vim /etc/hosts

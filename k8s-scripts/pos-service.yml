@@ -5,7 +5,9 @@ metadata:
 spec:
   selector:
     app: pos
+  #type: LoadBalancer #type to be external service/ default type is ClusterIP which is internal only
   ports:
     - protocol: TCP
-      port: 8090
-      targetPort: 9000
+      port: 8090 #internal service port
+      targetPort: 9000 #application port
+      #nodePort: 32377 #external service port

@@ -4,6 +4,12 @@
 #Make sure minikube is started
 #minikube start
 
+#To use ingress
+#minikube addons enable ingress
+
+#Nginx ingress controller will be installed in kube-system namespace
+#kubectl get pod -n kube-system
+
 #To see the instances created [depl-name]-[replicaset-id]-[pod-id]
 #kubectl get deployment
 #kubectl get replicaset
