@@ -31,6 +31,7 @@
 #kubectl rollout restart deployment [deployment name]
 
 #depoly configuration
+kubectl apply -f db-storage.yml
 kubectl apply -f db-deployment.yml
 kubectl apply -f db-service.yml
 kubectl apply -f pos-deployment.yml
