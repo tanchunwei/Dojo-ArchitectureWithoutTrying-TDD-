@@ -12,7 +12,7 @@ services:
   nginx:
     image: nginx:latest
     volumes:
-      - ./../nginx.config:/etc/nginx/nginx.conf:ro
+      - ./nginx.config:/etc/nginx/nginx.conf:ro
     depends_on:
       - web
     ports:
