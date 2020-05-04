@@ -1,6 +1,7 @@
-/src/main/resources/
-/src/test/resources/
 /.gradle/
 /build/
-/log/
-/data-postgres/
+/API/log/
+/API/data-postgres/
+/API/.gradle/
+/API/build/
+/data/
