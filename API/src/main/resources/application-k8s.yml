@@ -2,7 +2,7 @@ spring:
   datasource:
     #url: jdbc:postgresql://localhost:5432/pos #For local
     #url: jdbc:postgresql://db:5432/pos #For docker
-    url: jdbc:postgresql://10.104.168.233:5432/pos #using cluster ip instead not sure why service name suddenly unable to connect
+    url: jdbc:postgresql://10.100.0.1:5432/pos #using cluster ip instead not sure why service name suddenly unable to connect
     #jdbc:postgresql://db-service:5432/pos #For k8s
     username: postgres
     password: password

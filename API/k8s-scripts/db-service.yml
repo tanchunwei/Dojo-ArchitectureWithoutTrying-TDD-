@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: db-service
 spec:
+  clusterIP: 10.100.0.1
   type: NodePort
   selector:
     app: db
