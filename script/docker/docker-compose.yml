@@ -1,6 +1,16 @@
 version: "3.3"
 
 services:
+  webfrontend:
+    image: pos-frontend:latest
+    depends_on:
+      - web
+    expose:
+      - "9100"
+    ports:
+      - 9100:9100
+    stdin_open: true
+    tty: true
   web:
     image: pos:latest
     environment:
