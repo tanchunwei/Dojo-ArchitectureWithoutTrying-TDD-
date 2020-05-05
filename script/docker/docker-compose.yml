@@ -3,12 +3,8 @@ version: "3.3"
 services:
   webfrontend:
     image: pos-frontend:latest
-    depends_on:
-      - web
     expose:
       - "9100"
-    ports:
-      - 9100:9100
     stdin_open: true
     tty: true
   web:
@@ -25,8 +21,10 @@ services:
       - ./nginx.config:/etc/nginx/nginx.conf:ro
     depends_on:
       - web
+      - webfrontend
     ports:
       - "8090:8090"
+      - "8080:8080"
   db:
     image: postgres:11
     restart: always

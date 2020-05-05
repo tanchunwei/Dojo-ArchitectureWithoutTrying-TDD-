@@ -13,4 +13,4 @@
 #example to go into posgres console
 #docker exec -it <container id> psql -U postgres
 
-sudo docker-compose up --scale web=2 -d
+sudo docker-compose up --scale web=2 --scale webfrontend=2 -d
