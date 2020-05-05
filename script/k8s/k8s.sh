@@ -42,3 +42,6 @@ kubectl apply -f db-deployment.yml
 kubectl apply -f db-service.yml
 kubectl apply -f pos-deployment.yml
 kubectl apply -f pos-service.yml
+kubectl apply -f webfrontend-deployment.yml
+kubectl apply -f webfrontend-service.yml
+kubectl apply -f ingress.yml

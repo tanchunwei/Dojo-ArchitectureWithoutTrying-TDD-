@@ -8,8 +8,8 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: pos-service
-          servicePort: 8090
+          serviceName: webfrontend-service
+          servicePort: 8080
 # kubectl get ingress
 # note that after ip address is assigned, need to add the ip into the host file
 # so that the external server [access hostname] -> ingress controller -> service -> pod

@@ -15,6 +15,7 @@
   "scripts": {
     "start": "react-scripts start",
     "start:docker": "env-cmd -f .env.docker react-scripts start",
+    "start:k8s": "env-cmd -f .env.k8s react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

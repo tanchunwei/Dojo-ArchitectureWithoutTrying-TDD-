@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webfrontend-deployment
+  labels:
+    app: webfrontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: webfrontend
+  template:
+    metadata:
+      labels:
+        app: webfrontend
+    spec:
+      containers:
+        - name: webfrontend
+          image: pos-frontend:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9100
+          stdin: true
+          tty: true
