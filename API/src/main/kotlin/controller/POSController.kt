@@ -1,9 +1,11 @@
 package com.pos.controller
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.pos.repository.InventoryRepo
 import com.pos.service.POSService
-import com.pos.view.WebDisplay
+import com.pos.view.ProductWebDisplay
 import com.pos.model.Price
+import com.pos.model.Product
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -16,13 +18,17 @@ import com.pos.repository.InventoryInMemoryRepo
 class PosController(
     val template : NamedParameterJdbcTemplate
 ){
-    private val display = WebDisplay()
+    private val objectMapper = ObjectMapper()
+    private val display = ProductWebDisplay()
     private val posService : POSService = POSService(
         InventoryInMemoryRepo(
             mapOf(
-                "12345" to Price(
+                "12345" to Product(1, "12345", "Fish", "Fresh water fish", Price(
                     1250
-                )
+                )),
+                "67890" to Product(1, "67890", "Pork", "Airpork", Price(
+                        990
+                ))
             )
         ),
         display
@@ -51,14 +57,28 @@ class PosController(
     fun barcode(@PathVariable barcode : String) : ResponseEntity<String>{
         logger.trace("onBarcode $barcode")
         posService.onBarcode(barcode)
-        return  ResponseEntity<String>(display.toJson(), HttpStatus.OK)
+        return ResponseEntity<String>(objectMapper.writeValueAsString(display.getVM()), HttpStatus.OK)
     }
 
     @GetMapping("barcodedb/{barcode}", produces = ["application/json"])
     fun barcodedb(@PathVariable barcode : String) : ResponseEntity<String>{
         logger.trace("onBarcodeDB $barcode")
         posServiceDB.onBarcode(barcode)
-        return  ResponseEntity<String>(display.toJson(), HttpStatus.OK)
+        return  ResponseEntity<String>(objectMapper.writeValueAsString(display.getVM()), HttpStatus.OK)
+    }
+
+    @GetMapping("getallinventory", produces = ["application/json"])
+    fun allInventory() : ResponseEntity<String>{
+        logger.trace("GetAllInventory")
+        val vm = posService.getAllInventory()
+        return ResponseEntity<String>(objectMapper.writeValueAsString(vm), HttpStatus.OK)
+    }
+
+    @GetMapping("getallinventorydb", produces = ["application/json"])
+    fun allInventoryDb() : ResponseEntity<String>{
+        logger.trace("GetAllInventoryDB")
+        val vm = posServiceDB.getAllInventory()
+        return  ResponseEntity<String>(objectMapper.writeValueAsString(vm), HttpStatus.OK)
     }
 
     companion object{

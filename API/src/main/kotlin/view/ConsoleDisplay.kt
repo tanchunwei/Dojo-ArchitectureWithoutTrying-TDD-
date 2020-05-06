@@ -1,11 +1,12 @@
 package com.pos.view
 
 import com.pos.model.Price
+import com.pos.model.Product
 import com.pos.view.interfaces.IDisplay
 
 class ConsoleDisplay : IDisplay {
-    override fun displayPrice(price: Price) {
-        println(price)
+    override fun displayProduct(product: Product) {
+        println(product)
     }
 
     override fun displayProductNotFound(barcode: String) {

@@ -1,26 +1,34 @@
 import com.pos.model.Price
+import com.pos.model.Product
+import com.pos.repository.interfaces.IInventory
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import com.pos.repository.interfaces.IInventory
 
 abstract class InventoryTest {
     @Test
-    fun priceFound(){
-        val priceInProduct = Price(1250)
+    fun itemFound(){
+        val product : Product = Product(
+                1,
+                "12345",
+                "Fish",
+                "Fresh water fish",
+                Price(1250)
+        )
 
-        val actualPrice = inventoryWith("12345", priceInProduct).getInventory("12345")
+        val actualPrice = inventoryWith("12345", product).getInventory("12345")
 
-        Assertions.assertEquals(priceInProduct, actualPrice)
+        Assertions.assertEquals(product, actualPrice)
     }
 
     @Test
-    fun priceNotFound(){
+    fun itemNotFound(){
         val actualPrice = inventoryWithout("12345").getInventory("12345")
 
         Assertions.assertEquals(null, actualPrice)
     }
 
-    protected abstract fun inventoryWith(barcode: String, price: Price): IInventory
+    protected abstract fun inventoryWith(barcode: String, price: Product): IInventory
 
     protected abstract fun inventoryWithout(barcode : String): IInventory
 }
+

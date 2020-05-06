@@ -1,10 +1,13 @@
 import com.pos.service.POSService
 import com.pos.model.Price
+import com.pos.model.Product
+import com.pos.model.view.WebDisplayViewModel
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito
 import com.pos.repository.interfaces.IInventory
 import com.pos.view.interfaces.IDisplay
+import org.junit.Assert
 
 class POSServiceTest() {
     private lateinit var displayMock: IDisplay
@@ -20,11 +23,12 @@ class POSServiceTest() {
     @Test
     fun productFound(){
         val price = Price(1250)
-        Mockito.doReturn(price).`when`(inventorMock).getInventory("::product found barcode::")
+        val product = Product(1, "", "", "", price)
+        Mockito.doReturn(product).`when`(inventorMock).getInventory("::product found barcode::")
 
         POSService(inventorMock, displayMock).onBarcode("::product found barcode::")
 
-        Mockito.verify(displayMock).displayPrice(price)
+        Mockito.verify(displayMock).displayProduct(product)
         Mockito.verifyNoMoreInteractions(displayMock)
     }
 
@@ -44,6 +48,17 @@ class POSServiceTest() {
 
         Mockito.verify(displayMock).displayEmptyBarcode()
         Mockito.verifyNoMoreInteractions(displayMock)
+    }
+
+    @Test
+    fun displayListOfProducts(){
+        val price = Price(1250)
+        val product = Product(1, "", "", "", price)
+        Mockito.doReturn(listOf(product)).`when`(inventorMock).getAllInventory()
+
+        val vm : WebDisplayViewModel<List<Product>> = POSService(inventorMock, displayMock).getAllInventory()
+
+        Assert.assertEquals(1, vm.response?.size)
     }
 }
 

@@ -1,4 +1,5 @@
 import com.pos.model.Price
+import com.pos.model.Product
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -24,12 +25,12 @@ class ConsoleDisplayTest() {
     }
 
     @Test
-    fun displayPrice(){
+    fun displayProduct(){
         val display : IDisplay =
             ConsoleDisplay()
-        display.displayPrice(Price(1250))
+        display.displayProduct(Product(1, "12345", "Fish", "Fresh water fish", Price(1250)))
 
-        verify(outMock).println(Price(1250))
+        verify(outMock).println(Product(1, "12345", "Fish", "Fresh water fish", Price(1250)))
     }
 
     @Test
