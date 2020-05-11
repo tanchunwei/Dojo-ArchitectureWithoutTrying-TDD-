@@ -1,12 +1,12 @@
 import React from 'react';
 import './../../App.css';
 
-function About(){
+function Order(){
     return (
         <div>
-            <h3>Client About Page</h3>
+            <h3>Order Page</h3>
         </div>
     );
 }
 
-export default About;
+export default Order;

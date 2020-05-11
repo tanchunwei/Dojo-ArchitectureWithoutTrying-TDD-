@@ -3,6 +3,9 @@ import './../../App.css';
 import {Link} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import {clientSignoutAction} from './../../redux/actions/clientAuthAction'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 function Nav(){
 
@@ -19,35 +22,46 @@ function Nav(){
 
     return (
         <nav>
-            <div>
-                <h3>Logo</h3>
-            </div>
+            <Container fluid>
+                <Row>
+                    <Col>
+                        <h3>Logo</h3>
+                    </Col>
 
-            <div>
-                <ul className="nav-links">
-                    <Link style={navStyle} to="/client/about">
-                        <li>About</li>
-                    </Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Link style={navStyle} to="/client/shop">
-                        <li>Shop</li>
-                    </Link>
-                </ul>
-            </div>
-            <div>
-            {clientAuth.isAuthenticated && (
-                <div>
-                    <small>
-                        ClientID:<br/>
-                        {clientAuth.clientID} <br/>
+                    <Col>
                         <ul className="nav-links">
-                            <Link style={navStyle} onClick={logout}>
-                                <li>Logout</li>
+                            <Link style={navStyle} to="/client/about">
+                                <li>About</li>
+                            </Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <Link style={navStyle} to="/client/shop">
+                                <li>Shop</li>
                             </Link>
                         </ul>
-                    </small>
-                </div>
-            )}
-            </div>
+                    </Col>
+                    <Col>
+                        {clientAuth.isAuthenticated && (
+                            <Container fluid>
+                                <Row>
+                                    <Col>
+                                        <small>
+                                            ClientID: {clientAuth.clientID}
+                                        </small>
+                                    </Col>
+                                    <Col>
+                                        <small>
+                                            <ul className="nav-links">
+                                                <Link style={navStyle} onClick={logout}>
+                                                    <li>Logout</li>
+                                                </Link>
+                                            </ul>
+                                        </small>
+                                    </Col>
+                                </Row>
+                            </Container>
+                        )}
+                    </Col>
+                </Row>
+            </Container>
         </nav>
     );
 }

@@ -4,7 +4,7 @@ import './../../App.css';
 function About(){
     return (
         <div>
-            <h3>Client About Page</h3>
+            <h3>Host About Page</h3>
         </div>
     );
 }
