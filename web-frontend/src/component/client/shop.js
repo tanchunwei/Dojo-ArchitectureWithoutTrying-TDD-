@@ -1,24 +1,27 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import './../../App.css';
 import {Link} from 'react-router-dom'
+import {useAlert} from 'react-alert'
 
 function Shop(){
-
+    const alert = useAlert()
+    const alertRef = useRef(alert);
     useEffect(() => {
         fetchItems()
     }, []);
 
     const [items, setItems]  = useState([]);
 
-    const fetchItems = async () => {
+    const fetchItems = async (err) => {
         const data = await fetch('/api/getallinventory')
         .then((data) => {
             return data.json();
+        })
+        .catch(() => {
+            alertRef.current.error("Error when getting inventory information");
         });
 
-        console.log(data);
-
-        if(data.result){
+        if(data && data.result){
             setItems(data.response);
         }else{
             setItems([]);

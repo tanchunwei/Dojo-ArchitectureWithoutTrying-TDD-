@@ -9,10 +9,6 @@ import Col from 'react-bootstrap/Col'
 
 function Nav(){
 
-    const navStyle = {
-        color: 'white'
-    }
-
     const dispatch = useDispatch()
     const clientAuth = useSelector(state => state.clientAuth);
 
@@ -30,10 +26,10 @@ function Nav(){
 
                     <Col>
                         <ul className="nav-links">
-                            <Link style={navStyle} to="/client/about">
+                            <Link className="nav-style" to="/client/about">
                                 <li>About</li>
                             </Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <Link style={navStyle} to="/client/shop">
+                            <Link className="nav-style" to="/client/shop">
                                 <li>Shop</li>
                             </Link>
                         </ul>
@@ -50,9 +46,7 @@ function Nav(){
                                     <Col>
                                         <small>
                                             <ul className="nav-links">
-                                                <Link style={navStyle} onClick={logout}>
-                                                    <li>Logout</li>
-                                                </Link>
+                                                <li className="nav-style" onClick={logout}>Logout</li>
                                             </ul>
                                         </small>
                                     </Col>

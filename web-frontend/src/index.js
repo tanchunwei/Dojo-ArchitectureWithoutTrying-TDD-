@@ -6,17 +6,26 @@ import * as serviceWorker from './serviceWorker';
 import allReducers from './redux/reducers'
 import {createStore} from 'redux'
 import { Provider } from 'react-redux'
+import {transitions, positions, Provider as AlertProvider}  from 'react-alert'
+import AlertTemplate from 'react-alert-template-basic'
 
 const store = createStore(
     allReducers,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
+const options = {
+    position: positions.BOTTOM_RIGHT,
+    transition: transitions.SCALE
+}
+
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-        <App />
-    </Provider>
+    <AlertProvider template={AlertTemplate} {...options}>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </AlertProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -2,8 +2,10 @@ import React from 'react';
 import './../../App.css';
 import {useSelector, useDispatch} from 'react-redux'
 import {hostAuthAction} from './../../redux/actions/hostAuthAction'
+import {useAlert} from 'react-alert'
 
 function Home(){
+    const alert = useAlert();
     const dispatch = useDispatch();
     const hostAuth = useSelector(state => state.hostAuth);
 
@@ -11,6 +13,8 @@ function Home(){
         var pwd = document.getElementById("pwd").value;
         if(pwd === 'password123')
             dispatch(hostAuthAction());
+        else
+            alert.error("Fail to login")
     };
 
     return (

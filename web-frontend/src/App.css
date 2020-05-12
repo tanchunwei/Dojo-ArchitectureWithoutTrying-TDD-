@@ -14,3 +14,13 @@ nav{
   align-items: center;
   list-style: none;
 }
+
+.nav-style{
+    color: white;
+    cursor: pointer
+}
+
+.nav-style:hover{
+    text-decoration: underline;
+    color: white;
+}
