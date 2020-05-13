@@ -32,7 +32,7 @@ function Shop(){
         <div>
             <h3>Shop Page</h3>
             {items.map(item => (
-                <Link to={`shop/${item.barcode}`}>
+                <Link key={item.barcode} to={`shop/${item.barcode}`}>
                     <h4>{item.name}</h4>
                 </Link>
             ))}
