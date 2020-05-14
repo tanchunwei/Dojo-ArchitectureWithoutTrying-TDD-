@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Home from './component/home';
+import TestWebSocket from './component/test-web-socket';
 import ClientNav from './component/client/nav';
 import ClientHome from './component/client/home';
 import ClientAbout from './component/client/about';
@@ -43,6 +44,7 @@ function App() {
             </Switch>
             <Switch>
                 <Route path="/" exact component={Home} />
+                <Route path="/testwebsocket" exact component={TestWebSocket} />
 
                 <Route path="/client" exact component={ClientHome} />
                 <ClientRoute path="/client/about" component={ClientAbout} />
