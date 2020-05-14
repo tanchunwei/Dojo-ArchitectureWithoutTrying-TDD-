@@ -5,36 +5,55 @@ import Stomp from 'stompjs'
 
 function TestWebSocket(){
 
-    const sock = new SockJS('/websocket')
-    const stompClient = Stomp.over(sock)
+    const sock = new SockJS('/websocket');
+    const stompClient = Stomp.over(sock);
+    let testidsocket = null;
 
     stompClient.connect({}, function () {
-        console.log('connected')
+        console.log('connected');
 
         stompClient.subscribe('/topic/testsocket', function(response){
             var data = JSON.parse(response.body);
-            console.log(data)
+            console.log(data);
         })
     })
-    //sock.onopen = () => {
-    //    console.log('connected')
-    //};
-    //sock.onmessage = () => {
-    //    console.log('message received')
-    //};
-    //sock.onclose = () => {
-    //    console.log('closed')
-    //};
+
+    const subscribeIdMsg = () => {
+        var id = document.getElementById("id").value;
+        if(id === "")
+            return;
+
+        if(testidsocket){
+            testidsocket.unsubscribe();
+            testidsocket = null;
+        }
+
+        if(!testidsocket){
+            testidsocket = stompClient.subscribe('/topic/testidsocket.' + id, function(response){
+                var data = JSON.parse(response.body);
+                console.log(data);
+            })
+        }
+    }
+
+    const sendIdMsg = () => {
+        var id = document.getElementById("id").value;
+        console.log('send id: ' + id);
+        stompClient.send('/app/testidsocket/' + id, {}, JSON.stringify({'messageBy' : 'test'}));
+    }
 
     const sendMsg = () => {
-        console.log('send')
+        console.log('send');
         stompClient.send('/app/testsocket', {}, JSON.stringify({'messageBy' : 'test'}));
         return;
     };
 
     return (
         <div>
-            <button onClick={sendMsg}>send</button>
+            <button onClick={sendMsg}>send</button><br/>
+            <input type="text" id ="id"/>
+            <button onClick={subscribeIdMsg}>subscribe</button>
+            <button onClick={sendIdMsg}>send</button>
         </div>
     );
 }

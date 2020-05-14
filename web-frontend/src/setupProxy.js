@@ -16,14 +16,21 @@ module.exports = function(app){
         })
     );
     app.use(
-        '/app',
+        '/websocket/*',
         createProxyMiddleware({
             target: process.env.REACT_APP_API_PROXY_URL,
             changeOrigin: true
         })
     );
     app.use(
-        '/topic',
+        '/app/*',
+        createProxyMiddleware({
+            target: process.env.REACT_APP_API_PROXY_URL,
+            changeOrigin: true
+        })
+    );
+    app.use(
+        '/topic/*',
         createProxyMiddleware({
             target: process.env.REACT_APP_API_PROXY_URL,
             changeOrigin: true
