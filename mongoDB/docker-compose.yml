@@ -1,0 +1,95 @@
+version: '3'
+
+networks:
+  mongonet:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.0.0/16
+
+services:
+  mongos:
+    container_name: mongos
+    image: mongo
+    command: mongos --configdb cfgrs/cfgsvr1:27017,cfgsvr2:27017,cfgsvr3:27017 --bind_ip 0.0.0.0 --port 27017
+    ports:
+      - 60000:27017
+    networks:
+      mongonet:
+        ipv4_address: 172.28.100.1
+    depends_on:
+      - cfgsvr1
+      - cfgsvr2
+      - cfgsvr3
+
+  cfgsvr1:
+    container_name: cfgsvr1
+    image: mongo
+    command: mongod -configsvr --replSet cfgrs --port 27017 -dbpath /data/db
+    ports:
+      - 40001:27017
+    networks:
+      mongonet:
+        ipv4_address: 172.28.101.1
+    volumes:
+      - ./data/cfgsvr1:/data/db
+
+  cfgsvr2:
+    container_name: cfgsvr2
+    image: mongo
+    command: mongod -configsvr --replSet cfgrs --port 27017 -dbpath /data/db
+    ports:
+      - 40002:27017
+    networks:
+      mongonet:
+        ipv4_address: 172.28.101.2
+    volumes:
+      - ./data/cfgsvr2:/data/db
+
+  cfgsvr3:
+    container_name: cfgsvr3
+    image: mongo
+    command: mongod -configsvr --replSet cfgrs --port 27017 -dbpath /data/db
+    ports:
+      - 40003:27017
+    networks:
+      mongonet:
+        ipv4_address: 172.28.101.3
+    volumes:
+      - ./data/cfgsvr3:/data/db
+
+  shard1svr1:
+    container_name: shard1svr1
+    image: mongo
+    command: mongod --shardsvr --replSet shard1rs --port 27017 --dbpath /data/db
+    ports:
+      - 50001:27017
+    networks:
+      mongonet:
+        ipv4_address: 172.28.102.1
+    volumes:
+      - ./data/shard1svr1:/data/db
+
+  shard1svr2:
+    container_name: shard1svr2
+    image: mongo
+    command: mongod --shardsvr --replSet shard1rs --port 27017 --dbpath /data/db
+    ports:
+      - 50002:27017
+    networks:
+      mongonet:
+        ipv4_address: 172.28.102.2
+    volumes:
+      - ./data/shard1svr2:/data/db
+
+  shard1svr3:
+    container_name: shard1svr3
+    image: mongo
+    command: mongod --shardsvr --replSet shard1rs --port 27017 --dbpath /data/db
+    ports:
+      - 50003:27017
+    networks:
+      mongonet:
+        ipv4_address: 172.28.102.3
+    volumes:
+      - ./data/shard1svr3:/data/db
