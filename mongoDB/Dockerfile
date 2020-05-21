@@ -7,3 +7,5 @@ RUN apt-get update && apt-get install -y \
 
 COPY ./installation /installation/
 RUN dpkg --install installation/mongodb-mms_4.2.13.56889.20200513T1941Z-1_x86_64.deb
+EXPOSE 8080
+ENTRYPOINT ["sudo", "service", "mongodb-mms start"]

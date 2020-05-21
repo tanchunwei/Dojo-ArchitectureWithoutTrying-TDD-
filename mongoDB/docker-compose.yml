@@ -8,6 +8,17 @@ networks:
         - subnet: 172.28.0.0/16
 
 services:
+  mongoops:
+    container_name: mongoops
+    image: opsmanager
+    port:
+      - 61000:8080
+    volumes:
+      - /config/mms.conf:/ops/mongodb/mms/conf/mms.conf
+      - /config/conf-mms.properties:/ops/mongodb/mms/conf/conf-mms.properties
+    depends_on:
+      - mongos
+
   mongos:
     container_name: mongos
     image: mongo
