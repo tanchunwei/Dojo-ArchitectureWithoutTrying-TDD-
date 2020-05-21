@@ -11,11 +11,17 @@ services:
   mongoops:
     container_name: mongoops
     image: opsmanager
-    port:
+    ports:
       - 61000:8080
+    networks:
+      mongonet:
+        ipv4_address: 172.28.100.100
+    command: /bin/bash -c "sudo service mongodb-mms start"
     volumes:
-      - /config/mms.conf:/ops/mongodb/mms/conf/mms.conf
-      - /config/conf-mms.properties:/ops/mongodb/mms/conf/conf-mms.properties
+      - ./conf/mms.conf:/opt/mongodb/mms/conf/mms.conf:ro
+      - ./conf/conf-mms.properties:/opt/mongodb/mms/conf/conf-mms.properties:ro
+      - ./logs/:/opt/mongodb/mms/logs/
+      - ./key/:/etc/mongodb-mms/
     depends_on:
       - mongos
 
@@ -28,6 +34,20 @@ services:
     networks:
       mongonet:
         ipv4_address: 172.28.100.1
+    depends_on:
+      - cfgsvr1
+      - cfgsvr2
+      - cfgsvr3
+
+  mongos2:
+    container_name: mongos2
+    image: mongo
+    command: mongos --configdb cfgrs/cfgsvr1:27017,cfgsvr2:27017,cfgsvr3:27017 --bind_ip 0.0.0.0 --port 27017
+    ports:
+      - 60001:27017
+    networks:
+      mongonet:
+        ipv4_address: 172.28.100.2
     depends_on:
       - cfgsvr1
       - cfgsvr2
