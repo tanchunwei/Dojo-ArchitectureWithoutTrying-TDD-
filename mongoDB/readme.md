@@ -70,3 +70,36 @@ docker build -f Dockerfile -t opsmanager:latest .
 ```
 docker run --name opsmanager --rm -i -t opsmanager bash
 ```
+####Create user in mongo DB
+```
+mongo mongodb://localhost:60000
+```
+```
+use admin
+
+db.createUser({  
+ user:"mongodbadmin",
+ pwd:"password",
+ roles:[
+    {
+        "role" : "readWriteAnyDatabase",
+        "db" : "admin"
+    },
+    {
+        "role" : "dbAdminAnyDatabase",
+        "db" : "admin"
+    },
+    {
+        "role" : "clusterAdmin",
+        "db" : "admin"
+    },
+    {
+        "role" : "clusterMonitor",
+        "db" : "admin"
+    }
+ ],
+ mechanisms:[  
+  "SCRAM-SHA-1"
+ ]
+})
+```
