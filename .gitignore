@@ -5,8 +5,3 @@
 /API/.gradle/
 /API/build/
 /data/
-/mongoDB/data/
-/mongoDB/installation/*
-!/mongoDB/installation/installation.md
-/mongoDB/key/
-/mongoDB/logs/
